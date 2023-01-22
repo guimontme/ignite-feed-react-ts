@@ -1,0 +1,126 @@
+.post {
+  background: var(--gray-800);
+  border-radius: 8px;
+  padding: 40px;
+}
+
+.post + .post {
+  margin-block-start: 2rem;
+}
+
+/* Post header */
+
+.post > header {
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.author {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.authorInfo > * {
+  display: block;
+}
+
+.authorInfo strong {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--gray-100);
+}
+
+.authorInfo span {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--gray-400);
+}
+
+.time {
+  font-size: 0.875rem;
+  color: var(--gray-400);
+}
+
+/* Post Content */
+
+.content p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--gray-300);
+}
+
+.content p + p {
+  margin-block-start: 25px;
+}
+
+.content p a {
+  color: var(--green-500);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.content p a:hover {
+  color: var(--green-200);
+}
+
+/* Post Comment Form */
+
+.commentForm {
+  margin-block-start: 1.5rem;
+  padding-block-start: 1.5rem;
+  border-top: 1px solid var(--gray-600);
+}
+
+.commentForm h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gray-100);
+  line-height: 1.6;
+  margin-block-end: 1rem;
+} 
+
+.commentForm textarea {
+  background-color: var(--gray-900);
+  border: none;
+  width: 100%;
+  height: 6rem;
+  border-radius: 8px;
+  resize: none;
+  padding: .875rem 1rem;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.commentForm footer {
+  visibility: hidden;
+  max-height: 0;
+}
+
+.commentForm:focus-within footer{
+  visibility: visible;
+  max-height: none;
+}
+
+.commentForm button {
+  background-color: var(--green-500);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  color: var(--gray-300);
+  margin-block-start: 1rem;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  transition: background-color .3s;
+}
+
+.commentForm button:hover, .commentForm button:active {
+  background-color: var(--green-200);
+  border-radius: 8px;
+  color: var(--white);
+}

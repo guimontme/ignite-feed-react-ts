@@ -5,6 +5,13 @@
   padding: 1.25rem;
 }
 
+.header h1 {
+  font-size: 1.45rem;
+}
+
 .header img {
   height: 2rem;
+  vertical-align: middle;
+  margin-inline-end: 1rem;
 }
+
