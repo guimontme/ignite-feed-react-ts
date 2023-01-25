@@ -5,6 +5,7 @@ import ptBR from 'date-fns/esm/locale/pt-BR';
 import { Comment } from './Comment';
 import { Avatar } from './Avatar';
 import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
+import { string } from 'prop-types';
 
 interface Author {
   name: string;
@@ -17,6 +18,8 @@ interface Content {
   content: string;
 }
 
+// type Comment:string;
+
 export interface PostProps {
   author: Author;
   publishedAt: Date;
@@ -25,13 +28,14 @@ export interface PostProps {
 
 export function Post({author, publishedAt, content}: PostProps) {
   
-  const [comments, setComments] = useState(['Psot bem bacana, hein?!']);
+  const [comments, setComments] = useState(['Awesome!']);
 
   const [newCommentText, setNewCommentText] = useState('');
 
   const publishedAtDateFormatted = format(
     publishedAt,
     "MMMM ',' dd yyyy 'at' HH:mm", 
+    /* in ptBR */
     // "d 'de' LLLL 'de' yyyy 'às' HH:mm", 
     // {locale: ptBR}
   );
@@ -105,7 +109,7 @@ export function Post({author, publishedAt, content}: PostProps) {
           <button 
             type="submit"
             disabled={isNewCommentEmpty}
-          >Comment</button>
+          >Publish</button>
         </footer>
       </form>
       <div className={styles.commentList}>

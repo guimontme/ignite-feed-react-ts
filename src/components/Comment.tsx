@@ -42,7 +42,7 @@ export function Comment({content, onDeleteComment}: CommentProps) {
         
         <footer className={styles.commentActions}>
           <button onClick={handleLikeComment}>
-            <ThumbsUp size={20} /> Applaud <span>{clapCount}</span>
+            <ThumbsUp size={20} /> Applaud {clapCount > 0 ? <span>{clapCount}</span> : ''}
           </button>
         </footer>
       </div>

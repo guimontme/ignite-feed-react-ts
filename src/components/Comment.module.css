@@ -53,12 +53,20 @@
   border: 0;
   cursor: pointer;
   line-height: 0;
-  border-radius: 2px;
+  border-radius: 4px;
+  padding: .2rem;
+
 }
 
-.commentBox .commentContent header button:hover, .commentBox .commentContent header button:active {
+.commentBox .commentContent header button:hover, 
+.commentBox .commentContent header button:active {
   color: var(--red-500);
+  background-color: var(--red-800);
 }
+
+.commentBox .commentContent header button:focus-visible {
+  outline-color: var(--red-800);
+} 
 
 .commentBox .commentContent p {
   color: var(--gray-300);
@@ -73,7 +81,7 @@
 
 
 .commentBox .commentActions button {
-  background: transparent;
+  background-color: transparent;
   border: 0;
   color: var(--gray-400);
 
@@ -81,11 +89,15 @@
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 4px;
+  padding: .4rem;
+  outline: 2px solid transparent;
 }
 
-.commentBox .commentActions button:hover {
+.commentBox .commentActions button:hover,
+.commentBox .commentActions button:focus {
   color: var(--green-200);
+  background-color: var(--green-800);
 }
 
 .commentBox .commentActions button svg{
