@@ -2,7 +2,7 @@
 
 <img src="./screenshot.png">
 
-It is a project of a post feed where some users can create comments and edit then. 
+It is a project of a post feed where some users can create comments and edit them. 
 
 It's based on the Rocketseat Project [Ignite Feed](https://github.com/rocketseat-education/ignite-reactjs-01-fundamentos-react). 
 
