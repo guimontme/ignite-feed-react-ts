@@ -18,9 +18,9 @@ const posts: Post[] = [
       role: 'Web Developer'
     },
     content: [
-      {type: 'paragraph', content: 'Fala galeraa 👋'},
-      {type: 'paragraph', content: 'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀'},
-      {type: 'link', content: 'jane.design/doctorcare'}
+      {type: 'paragraph', content: 'Hello Guys 👋'},
+      {type: 'paragraph', content: 'I\'ve just finished this amazing Project that I learned on Rocketseat, I hope you enjoy it 🚀'},
+      {type: 'link', content: 'guimont.me/ignite-feed'}
     ],
     publishedAt: new Date('2023-01-22 18:00:00'),
   },
