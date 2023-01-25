@@ -1,7 +1,10 @@
 .comment {
   display: flex;
   gap: 1rem;
-  margin-block-start: 2rem;
+}
+
+.comment + .comment {
+  margin-block-start: 1.5rem;
 }
 
 .commentBox {

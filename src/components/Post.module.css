@@ -87,6 +87,7 @@
 
 .commentForm textarea {
   background-color: var(--gray-900);
+  color: var(--gray-400);
   border: none;
   width: 100%;
   height: 6rem;
@@ -117,10 +118,20 @@
   outline: none;
   font-weight: bold;
   transition: background-color .3s;
+  cursor: pointer;
 }
 
-.commentForm button:hover, .commentForm button:active {
+.commentForm button:not(:disabled):hover, .commentForm button:not(:disabled):active {
   background-color: var(--green-200);
   border-radius: 8px;
   color: var(--white);
+}
+
+.commentForm button:disabled {
+  opacity: .7;
+  cursor: not-allowed;
+}
+
+.commentList:not(:empty){
+  padding-top: 2rem;
 }

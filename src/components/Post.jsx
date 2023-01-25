@@ -1,43 +1,102 @@
 import styles from './Post.module.css';
+import { format, formatDistanceToNow } from 'date-fns';
+import ptBR from 'date-fns/esm/locale/pt-BR';
 
 import { Comment } from './Comment';
 import { Avatar } from './Avatar';
+import { useState } from 'react';
 
-export function Post() {
+export function Post({author, publishedAt, content}) {
+  
+  const [comments, setComments] = useState(['Psot bem bacana, hein?!']);
+
+  const [newCommentText, setNewCommentText] = useState('');
+
+  const publishedAtDateFormatted = format(
+    publishedAt,
+    "MMMM ',' dd yyyy 'at' HH:mm", 
+    // "d 'de' LLLL 'de' yyyy 'às' HH:mm", 
+    // {locale: ptBR}
+  );
+
+  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+    // locale: ptBR, 
+    addSuffix: true
+  });
+
+  function handleCreateNewComment(event) {
+    event.preventDefault();
+    setComments([...comments, newCommentText]);
+    setNewCommentText('');
+  }
+
+  function handleNewCommentChange(event) {
+    event.target.setCustomValidity('');
+    setNewCommentText(event.target.value);
+  }
+
+  function handleNewCommentValid(event) {
+    console.log(event);
+    event.target.setCustomValidity('Field obligatory*');
+  }
+
+  function deleteComment(commentToDelete) {
+    console.log(`Delete Comment: ${commentToDelete}`);
+    const commentsWithoutDeletedOne = comments.filter(comment => {
+        return comment !== commentToDelete
+      }
+    );
+    setComments(commentsWithoutDeletedOne);
+  }
+
+  const isNewCommentEmpty = newCommentText.length === 0;
+
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <Avatar src="https://github.com/guimontme.png" />
+          <Avatar src={author.avatarUrl} />
           <div className={styles.authorInfo}>
-            <strong>Gui Mont</strong>
-            <span>Dev Front-End</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
         </div>
-        <time time="Jan 21, 2023 at 08:24" dateTime='2023-01-21 08:24:25' className={styles.time}>
-          Published 1h ago
+        <time title={publishedAtDateFormatted} dateTime={publishedAt.toISOString()} className={styles.time}>
+          {publishedDateRelativeToNow}
         </time>
       </header>
       
       <div className={styles.content}>
-        <p>Fala galeraa 👋</p>
-        <p>Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀</p>
-        <p>👉{' '}&nbsp;{' '}<a href='#'> jane.design/doctorcare</a></p>
-        <p>
-          <a href='#'>#novoprojeto</a>{' '}
-          <a href='#'>#nlw</a> {' '}
-          <a href='#'>#rocketseat</a></p>
+        {content.map( line => {
+          if (line.type === 'paragraph') {
+            return <p key={line.content}>{line.content}</p>
+          } else if (line.type === 'link') {
+            return <p key={line.content}><a href="#">{line.content}</a></p>
+          } 
+        })}
       </div>
-
-      <form className={styles.commentForm}>
+      <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
         <h3>Leave your feedback</h3>
-        <textarea placeholder="Leave your feedback"></textarea>
+        <textarea 
+          placeholder="Leave your feedback" 
+          name="comment"
+          value={newCommentText}
+          onChange={handleNewCommentChange} 
+          onInvalid={handleNewCommentValid} 
+          required
+        ></textarea>
         <footer>
-          <button type="submit">Comment</button>
+          <button 
+            type="submit"
+            disabled={isNewCommentEmpty}
+          >Comment</button>
         </footer>
       </form>
-
-      <Comment />
+      <div className={styles.commentList}>
+        {comments.map((comment) => {
+          return (<Comment key={comment} content={comment}  onDeleteComment={deleteComment} />)
+        })}
+      </div>
 
     </article>
   )
