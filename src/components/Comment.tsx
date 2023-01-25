@@ -3,7 +3,12 @@ import { Trash, ThumbsUp  } from 'phosphor-react';
 import { Avatar } from './Avatar';
 import { useState } from 'react';
 
-export function Comment({content, onDeleteComment}) {
+interface CommentProps {
+  content: string;
+  onDeleteComment: (comment: string) => void;
+}
+
+export function Comment({content, onDeleteComment}: CommentProps) {
   
   const [clapCount, setClapCount] = useState(0);
 
@@ -28,7 +33,7 @@ export function Comment({content, onDeleteComment}) {
           <header>
             <div className={styles.authorAndTime}>
             <strong>Gui Mont <span>(you)</span></strong> 
-            <time time="Jan 21, 2023 at 08:24" dateTime='2023-01-21 08:24:25' className={styles.time}>13 min ago</time>
+            <time title="Jan 21, 2023 at 08:24" dateTime='2023-01-21 08:24:25' className={styles.time}>13 min ago</time>
             </div>
             <button className={styles.commentDelete} title="Delete Comment" onClick={handleDeleteComment}><Trash size={24} /></button>
           </header>

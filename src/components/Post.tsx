@@ -4,9 +4,26 @@ import ptBR from 'date-fns/esm/locale/pt-BR';
 
 import { Comment } from './Comment';
 import { Avatar } from './Avatar';
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
 
-export function Post({author, publishedAt, content}) {
+interface Author {
+  name: string;
+  avatarUrl: string;
+  role: string;
+}
+
+interface Content {
+  type: 'paragraph' | 'link';
+  content: string;
+}
+
+export interface PostProps {
+  author: Author;
+  publishedAt: Date;
+  content: Content[];
+}
+
+export function Post({author, publishedAt, content}: PostProps) {
   
   const [comments, setComments] = useState(['Psot bem bacana, hein?!']);
 
@@ -24,23 +41,22 @@ export function Post({author, publishedAt, content}) {
     addSuffix: true
   });
 
-  function handleCreateNewComment(event) {
+  function handleCreateNewComment(event: FormEvent) {
     event.preventDefault();
     setComments([...comments, newCommentText]);
     setNewCommentText('');
   }
 
-  function handleNewCommentChange(event) {
+  function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
     event.target.setCustomValidity('');
     setNewCommentText(event.target.value);
   }
 
-  function handleNewCommentValid(event) {
-    console.log(event);
+  function handleNewCommentValid(event: InvalidEvent<HTMLTextAreaElement>) {
     event.target.setCustomValidity('Field obligatory*');
   }
 
-  function deleteComment(commentToDelete) {
+  function deleteComment(commentToDelete: string) {
     console.log(`Delete Comment: ${commentToDelete}`);
     const commentsWithoutDeletedOne = comments.filter(comment => {
         return comment !== commentToDelete
